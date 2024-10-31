@@ -1,19 +1,16 @@
-﻿using LibraryAPI.Models;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace LibraryMVC.Models
+namespace LibraryManagementMVC.Models
 {
     public class Book
-
     {
-
-        public int BookID { get; set; }
+        public int BookId { get; set; }
         public string Title { get; set; }
-        public string Genre { get; set; }
-        public int PublishedYear { get; set; }
+        public int AuthorId { get; set; }
+        public int CategoryId { get; set; }
 
-        public int AuthorID { get; set; }
-        public Author Author { get; set; }
-        public int CategoryID { get; set; }
-        public Category Category { get; set; }
+        //Navigation Properties for Display
+        public string AuthorName { get; set; }
+        public string CategoryName { get; set; }
     }
 }
