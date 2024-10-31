@@ -1,37 +1,29 @@
-using LibraryAPI.Data;
+using LibraryManagementAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
-internal class Program
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Database configuration
+builder.Services.AddDbContext<LibraryContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
 {
-  
-        private static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-            // Add services to the container.
-            builder.Services.AddControllers();
+app.UseHttpsRedirection();
 
-            // Add the DbContext configuration
-            builder.Services.AddDbContext<LibraryContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("LibraryDB")));
+app.UseAuthorization();
 
-            // Configure Swagger (optional)
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+app.MapControllers();
 
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
-            app.MapControllers();
-            app.Run();
-        }
-    }
+app.Run();

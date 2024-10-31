@@ -1,11 +1,8 @@
-﻿namespace LibraryAPI.Models
+﻿namespace LibraryManagementAPI.Models
 {
     public class Category
     {
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
-
-        // Navigation property for the relationship
-        public ICollection<Book> Books { get; set; }
     }
 }

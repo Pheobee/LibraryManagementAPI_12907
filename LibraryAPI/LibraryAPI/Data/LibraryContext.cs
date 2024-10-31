@@ -1,8 +1,8 @@
-﻿using LibraryAPI.Models;
+﻿using LibraryManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
-namespace LibraryAPI.Data
+namespace LibraryManagementAPI.Data
 {
     public class LibraryContext : DbContext
     {
